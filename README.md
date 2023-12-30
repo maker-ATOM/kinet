@@ -2,12 +2,19 @@
 
 Kinetic Art displayed on terminal itself using ncurses.
 
+<p align="center">
+	<img src="images/demo.gif" width="600"/>
+</p>
+
+
 ## Todo
 
 - [ ] Dynamic size update based on window size
 - [ ] User parameter to define the trial angle
+- [ ] Arrow key binding to change the rate of animation
 - [ ] User parameter to set the background and foreground color
-- [ ] Default background and foreground color set to same as terminal color theme.
+- [ ] Default background and foreground color set to same as terminal color theme [ref](https://github.com/htop-dev/htop/tree/main) 
+  - How to access colors? => use terminfo database, term.h, getcap, tgetent => method that returns terminal capabilities,
 
 ## Usage
 
