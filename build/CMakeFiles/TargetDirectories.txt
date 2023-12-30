@@ -1,0 +1,7 @@
+/home/aditya/kinet/build/CMakeFiles/kinet.dir
+/home/aditya/kinet/build/CMakeFiles/edit_cache.dir
+/home/aditya/kinet/build/CMakeFiles/rebuild_cache.dir
+/home/aditya/kinet/build/CMakeFiles/list_install_components.dir
+/home/aditya/kinet/build/CMakeFiles/install.dir
+/home/aditya/kinet/build/CMakeFiles/install/local.dir
+/home/aditya/kinet/build/CMakeFiles/install/strip.dir
