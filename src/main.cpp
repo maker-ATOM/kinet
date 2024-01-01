@@ -3,6 +3,7 @@
 #include <cmath>
 #include <algorithm>
 #include <unistd.h>
+#include <cstring>
 
 using namespace std;
 
@@ -10,9 +11,43 @@ using namespace std;
 #define TRAIL_STEP 0.02
 
 #define TIME_STEP 100
-int main()
+
+#define DEFAULT_TRAIL 120
+
+void help()
 {
-    float TRAIL = 120 * M_PI / 180.0;
+    // print help
+    printf("Options:\n");
+    printf("-t degrees   Trail angle in degrees ranging from 0 to 180\n");
+    printf("-b r,g,b     RGB color for background\n");
+    printf("-f r,g,b     RGB color for foreground\n");
+    printf("Options:\n");
+}
+
+int main(int argc, char *argv[])
+{
+    float TRAIL = DEFAULT_TRAIL * M_PI / 180.0;
+
+    if (argc % 2 == 0)
+    {
+        help();
+        exit(0);
+    }
+
+    for (int i = 1; i < argc; i += 2)
+    {
+
+        if (strcmp(argv[i], "-t") == 0)
+        {
+            int angle = stoi(argv[i + 1]);
+            if (angle < 0 or angle > 180)
+            {
+                help();
+                exit(0);
+            }
+            TRAIL = angle * M_PI / 180.0;
+        }
+    }
 
     initscr();
 
@@ -52,7 +87,7 @@ int main()
 
             getmaxyx(stdscr, rows, cols);
             int r = min(rows, cols) / 3;
-            
+
             clear();
             int color_step = 0;
 
