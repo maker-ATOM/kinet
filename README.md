@@ -1,6 +1,6 @@
 # kinet
 
-Kinetic Art displayed on terminal itself using ncurses.
+Kinetic Art displayed on terminal using ncurses.
 
 <p align="center">
 	<img src="images/demo.gif" width="600"/>

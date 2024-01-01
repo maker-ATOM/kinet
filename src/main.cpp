@@ -49,6 +49,10 @@ int main()
 
         for (float theta = 0; theta < 2 * M_PI; theta += ANGLE_STEP)
         {
+
+            getmaxyx(stdscr, rows, cols);
+            int r = min(rows, cols) / 3;
+            
             clear();
             int color_step = 0;
 
