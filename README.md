@@ -13,7 +13,7 @@ Kinetic Art displayed on terminal using ncurses.
 - [x] User parameter to define the trial angle
 - [ ] Arrow key binding to change the rate of animation
 - [ ] Arrow key binding to change direction of travel => clockwise and anticlockwise
-- [ ] User parameter to set the background and foreground color
+- [x] User parameter to set the background and foreground color
 - [ ] Default background and foreground color set to same as terminal color theme [ref](https://github.com/htop-dev/htop/tree/main) 
   - How to access colors? => use terminfo database, term.h, getcap, tgetent => method that returns terminal capabilities,
 
@@ -54,14 +54,9 @@ make
 sudo make install
 ```
 
-Execute with default trail of 120 degrees
+Example execution with parameters
 ```
-kinet
-```
-
-Execute with trail ranging from 0 to 180 degrees
-```
-kinet -t <trail_angle>
+kinet -t 90 -b 36,31,49 -f 0,255,255
 ```
 
 ### Dependencies

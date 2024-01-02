@@ -1,37 +1,62 @@
 #include <iostream>
 #include <ncurses.h>
 #include <cmath>
-#include <algorithm>
 #include <unistd.h>
 #include <cstring>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 
-#define ANGLE_STEP 0.1
-#define TRAIL_STEP 0.02
+#define ANGLE_STEP 0.1  // rads
+#define TRAIL_STEP 0.02 // rads
 
-#define TIME_STEP 100
+#define TIME_STEP 100 // ms
 
-#define DEFAULT_TRAIL 120
+#define DEFAULT_TRAIL 120 // degree
 
 void help()
 {
     // print help
     printf("Options:\n");
     printf("-t degrees   Trail angle in degrees ranging from 0 to 180\n");
-    printf("-b r,g,b     RGB color for background\n");
-    printf("-f r,g,b     RGB color for foreground\n");
-    printf("Options:\n");
+    printf("-b r,g,b     RGB color for background ranging from 0 to 255\n");
+    printf("-f r,g,b     RGB color for foreground ranging from 0 to 255\n");
+    exit(0);
+}
+
+vector<int> parseColor(string scolor)
+{
+    char delimiter = ',';
+
+    vector<int> color;
+    istringstream stream(scolor);
+    string token;
+
+    while (getline(stream, token, delimiter))
+    {
+        int element = stoi(token) * 1000 / 255;
+        if (element > 1000 or element < 0)
+        {
+            help();
+        }
+        else
+        {
+            color.push_back(element);
+        }
+    }
+    return color;
 }
 
 int main(int argc, char *argv[])
 {
     float TRAIL = DEFAULT_TRAIL * M_PI / 180.0;
+    vector<int> bg = {0, 0, 0};
+    vector<int> fg = {1000, 1000, 1000};
 
     if (argc % 2 == 0)
     {
         help();
-        exit(0);
     }
 
     for (int i = 1; i < argc; i += 2)
@@ -43,9 +68,18 @@ int main(int argc, char *argv[])
             if (angle < 0 or angle > 180)
             {
                 help();
-                exit(0);
             }
             TRAIL = angle * M_PI / 180.0;
+        }
+
+        if (strcmp(argv[i], "-b") == 0)
+        {
+            bg = parseColor(argv[i + 1]);
+        }
+
+        if (strcmp(argv[i], "-f") == 0)
+        {
+            fg = parseColor(argv[i + 1]);
         }
     }
 
@@ -54,7 +88,7 @@ int main(int argc, char *argv[])
     start_color();
 
     // Defintion for non-alphanumeric keys
-    // keypad(stdscr, TRUE);
+    // keypad(stdscr, true);
 
     // Time out for getch
     // timeout(0);
@@ -74,8 +108,10 @@ int main(int argc, char *argv[])
 
     for (int i = 1; i < (TRAIL / TRAIL_STEP); i++)
     {
-        int color = i * (1000 / (TRAIL / TRAIL_STEP));
-        init_color(i, color, color, color);
+        int r = i * ((fg[0] - bg[0]) / (TRAIL / TRAIL_STEP)) + bg[0];
+        int g = i * ((fg[1] - bg[1]) / (TRAIL / TRAIL_STEP)) + bg[1];
+        int b = i * ((fg[2] - bg[2]) / (TRAIL / TRAIL_STEP)) + bg[2];
+        init_color(i, r, g, b);
         init_pair(i, COLOR_BLACK, i);
     }
 
