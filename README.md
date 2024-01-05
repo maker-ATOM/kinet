@@ -19,6 +19,8 @@ Kinetic Art displayed on terminal using ncurses.
 
 ## Usage
 
+**Installation**
+
 Install from apt
 
 ```
@@ -54,9 +56,24 @@ make
 sudo make install
 ```
 
-Example execution with parameters
+
+**Execution**
+
 ```
-kinet -t 90 -b 36,31,49 -f 0,255,255
+kinet # With default trail angle of 120 degrees, Background color - Black(0,0,0), Foreground color - White(255,255,255)
+```
+
+```
+kinet -t 90 -b 255,0,0 -f 0,0,255 # Parameters set to trail angle 90 degrees, Background color - Red(255,0,0), Foreground color - Blue(0,0,255)
+```
+
+**Parameters**
+
+```
+-t degrees   Trail angle in degrees ranging from 0 to 180
+-b r,g,b     RGB color for background ranging from 0 to 255
+-f r,g,b     RGB color for foreground ranging from 0 to 255
+
 ```
 
 ### Dependencies
