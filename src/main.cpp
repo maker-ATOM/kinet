@@ -22,6 +22,10 @@ void help()
     printf("-t degrees   Trail angle in degrees ranging from 0 to 180\n");
     printf("-b r,g,b     RGB color for background ranging from 0 to 255\n");
     printf("-f r,g,b     RGB color for foreground ranging from 0 to 255\n");
+    printf("---\n");
+    printf("Supported terminal emulators:\n");
+    printf("- gnome-terminal\n");
+    printf("- terminator\n");
     exit(0);
 }
 
@@ -32,6 +36,8 @@ vector<int> parseColor(string scolor)
     vector<int> color;
     istringstream stream(scolor);
     string token;
+
+    int count = 0;
 
     while (getline(stream, token, delimiter))
     {
@@ -44,12 +50,44 @@ vector<int> parseColor(string scolor)
         {
             color.push_back(element);
         }
+        count++;
+    }
+
+    if (count != 3)
+    {
+        help();
     }
     return color;
 }
 
 int main(int argc, char *argv[])
 {
+
+    // const char *term = std::getenv("TERM");
+    // const char *colorterm = std::getenv("COLORTERM");
+
+    // if (term != nullptr && colorterm != nullptr)
+    // {
+    //     if (std::string(term) == "xterm" && std::string(colorterm) == "truecolor")
+    //     {
+    //         std::cout << "Gnome Terminal is likely in use." << std::endl;
+    //     }
+    //     else if (std::string(term) == "xterm-256color" && std::string(colorterm) == "truecolor")
+    //     {
+    //         std::cout << "Terminator is likely in use." << std::endl;
+    //     }
+    //     else
+    //     {
+    //         std::cout << "Unable to determine the terminal emulator." << std::endl;
+    //     }
+    // }
+    // else
+    // {
+    //     std::cout << "Unable to determine the terminal emulator." << std::endl;
+    // }
+
+    // return 0;
+
     float TRAIL = DEFAULT_TRAIL * M_PI / 180.0;
     vector<int> bg = {0, 0, 0};
     vector<int> fg = {1000, 1000, 1000};

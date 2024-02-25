@@ -14,7 +14,10 @@ Kinetic Art displayed on terminal using ncurses.
 - [ ] Arrow key binding to change the rate of animation
 - [ ] Arrow key binding to change direction of travel => clockwise and anticlockwise
 - [x] User parameter to set the background and foreground color
-- [ ] Default background and foreground color set to same as terminal color theme [ref](https://github.com/htop-dev/htop/tree/main) 
+- [ ] Default background and foreground color set to same as terminal color theme [ref](https://github.com/htop-dev/htop/tree/main)
+  - 20.04, gnome-terminal - gsettings list-recursively org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles/
+  - 20.04, gnome-terminal - cd ~/.config/dconf/ && dconf dump / > dconf_settings.txt && cat dconf_settings.txt
+  - 20.04, terminator - cat ~/.config/terminator/config
   - How to access colors? => use terminfo database, term.h, getcap, tgetent => method that returns terminal capabilities,
 
 ## Usage
